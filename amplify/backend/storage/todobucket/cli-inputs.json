@@ -1,0 +1,14 @@
+{
+  "resourceName": "todobucket",
+  "policyUUID": "e9ac6d22",
+  "bucketName": "amplifyajcbucket",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

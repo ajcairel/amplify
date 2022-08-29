@@ -44,5 +44,12 @@
         }
       }
     }
+  },
+  "storage": {
+    "todobucket": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

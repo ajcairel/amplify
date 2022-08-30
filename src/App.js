@@ -120,11 +120,11 @@ function App() {
                     style={{ height: "20rem", paddingBottom: "1rem" }}
                   />
                 )}
-                <Card.Footer style={{ overflow: "scroll" }}>
+                <Card.Footer style={{ height: "8rem", overflow: "scroll" }}>
                   <small className="text-muted">{note.description}</small>
                 </Card.Footer>
                 <Button variant="danger" onClick={() => deleteNote(note)}>
-                  Delete Note
+                  Delete
                 </Button>
               </Card>
               // <div key={note.id || note.name}>

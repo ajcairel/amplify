@@ -1,7 +1,7 @@
 # Pinsta
 ## Personal Insta
 
-Check out the deployed app[here](https://main.d2wvop6dt3xsrr.amplifyapp.com/).
+[Deployed App](https://main.d2wvop6dt3xsrr.amplifyapp.com/).
 
 Full-stack React SPA  that allows users to post notes with the option to include a picture. 
 
@@ -14,4 +14,5 @@ This application was built using Amazon Amplify. I built this to get familiar wi
     - AWS AppSync (managed GraphQL service)
     - Amazon DynamoDB (NoSQL database)
     - Amazon S3 (storage service)
+    - AWS Global CDN
  

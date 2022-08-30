@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
 import "./App.css";
 import { API, Storage } from "aws-amplify";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 import { listNotes } from "./graphql/queries";
 import {
   createNote as createNoteMutation,
   deleteNote as deleteNoteMutation,
 } from "./graphql/mutations";
-
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 const initialFormState = { name: "", description: "" };
 
 function App() {
@@ -66,32 +72,71 @@ function App() {
 
   return (
     <div className="App">
-      <h1>My Notes App</h1>
+      <Authenticator>
+        {({ signOut, user }) => (
+          <main>
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1>Hello {user.username}</h1>
+            <Button variant="warning" onClick={signOut}>Sign Out</Button>
+          </main>
+        )}
+      </Authenticator>
+      <br/><br/>
+      <h3>Create A Post</h3>
       <input
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        placeholder="Note name"
+        placeholder="Name"
         value={formData.name}
-      />
+        />
+          <br/><br/>
       <input
         onChange={(e) =>
           setFormData({ ...formData, description: e.target.value })
         }
-        placeholder="Note description"
+        placeholder="Description"
         value={formData.description}
-      />
+        size="45"
+        />
+        <br/><br/>
       <input type="file" onChange={onChange} />
-      <button onClick={createNote}>Create Note</button>
-      <div style={{ marginBottom: 30 }}>
-        {notes.map((note) => (
-          <div key={note.id || note.name}>
-            <h2>{note.name}</h2>
-            <p>{note.description}</p>
-            <button onClick={() => deleteNote(note)}>Delete note</button>
-            {note.image && <img src={note.image} alt="Note" style={{ width: 400 }} />}
-          </div>
-        ))}
-      </div>
-      <withAuthenticator />
+        
+      <Button variant="success" onClick={createNote}>Create Post</Button>
+        <br/><br/>
+    
+      <h1>My Posts</h1>
+      <Container>
+        <Row xs={2} md={3} lg={2} style={{justifyContent: "center"}}>
+          
+            {notes.map((note) => (
+              <Card style={{ width: "15rem" }}>
+                <Card.Body style={{ height: "5rem" }}>
+                  <Card.Title>{note.name}</Card.Title>
+                </Card.Body>
+                {note.image && (
+                  <Card.Img
+                    variant="top"
+                    src={note.image}
+                    alt="Note"
+                    style={{ height: "20rem", paddingBottom: "1rem" }}
+                  />
+                )}
+                <Card.Footer style={{ overflow: "scroll" }}>
+                  <small className="text-muted">{note.description}</small>
+                </Card.Footer>
+                <Button variant="danger" onClick={() => deleteNote(note)}>
+                  Delete Note
+                </Button>
+              </Card>
+              // <div key={note.id || note.name}>
+              //   <h2>{note.name}</h2>
+              //   <p>{note.description}</p>
+              //   {note.image && <img src={note.image} alt="Note" style={{ width: 400 }} />}
+              //   <button onClick={() => deleteNote(note)}>Delete note</button>
+              // </div>
+            ))}
+         
+        </Row>
+      </Container>
     </div>
   );
 }

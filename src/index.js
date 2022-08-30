@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Amplify from 'aws-amplify';
 import config from './aws-exports';
+import 'bootstrap/dist/css/bootstrap.css';
 Amplify.configure(config);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
